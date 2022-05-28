@@ -1,4 +1,6 @@
-# ChaywelaFront
+# Chaywela_Client
+Time Tracking app built with Angular.
+Please let me know if you have any suggestions or ideas on how to improve this project.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
