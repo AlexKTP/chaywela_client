@@ -1,4 +1,4 @@
-import { ProjectType } from "../enums/projectType.enum";
+import { ProjectType } from "../enums/project-type.enum";
 import { User } from "./user";
 
 export interface Project {
