@@ -3,40 +3,41 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CustomReponse } from '../models/custom-reponse';
-import { User } from '../models/user';
+import { Project } from '../models/project';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ProjectService {
 
   private readonly apiUrl: any;
 
   constructor(private http: HttpClient) { }
 
-  users$ = <Observable<CustomReponse>>
-    this.http.get<CustomReponse>('${this.apiUrl}/users/list')
+  projects$ = <Observable<CustomReponse>>
+    this.http.get<CustomReponse>('${this.apiUrl}/projects/list')
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
-
-  save$ = (user: User) => <Observable<CustomReponse>>
-    this.http.post<CustomReponse>('${this.apiUrl}/users/save', user)
+  save$ = (project: Project) => <Observable<CustomReponse>>
+    this.http.post<CustomReponse>('${this.apiUrl}/projects/save', project)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
-  delete$ = (userId: number) => <Observable<CustomReponse>>
-    this.http.delete<CustomReponse>('${this.apiUrl}/users/delete/${userId}')
+  delete$ = (projectId: number) => <Observable<CustomReponse>>
+    this.http.delete<CustomReponse>('${this.apiUrl}/projects/${projectId}')
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
+
 
   handleError(err: any): Observable<never> {
     throw new Error('Method not implemented.');
   }
+
 }

@@ -3,34 +3,32 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CustomReponse } from '../models/custom-reponse';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class TaskService {
 
   private readonly apiUrl: any;
 
   constructor(private http: HttpClient) { }
 
-  users$ = <Observable<CustomReponse>>
-    this.http.get<CustomReponse>('${this.apiUrl}/users/list')
+  projects$ = <Observable<CustomReponse>>
+    this.http.get<CustomReponse>('${this.apiUrl}/tasks/list')
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
-
-  save$ = (user: User) => <Observable<CustomReponse>>
-    this.http.post<CustomReponse>('${this.apiUrl}/users/save', user)
+  save$ = (task: Task) => <Observable<CustomReponse>>
+    this.http.post<CustomReponse>('${this.apiUrl}/tasks/list', task)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
-  delete$ = (userId: number) => <Observable<CustomReponse>>
-    this.http.delete<CustomReponse>('${this.apiUrl}/users/delete/${userId}')
+  delete$ = (taskId: number) => <Observable<CustomReponse>>
+    this.http.delete<CustomReponse>('${this.apiUrl}/tasks/delete/${taskId}')
       .pipe(
         tap(console.log),
         catchError(this.handleError)
@@ -39,4 +37,5 @@ export class UserService {
   handleError(err: any): Observable<never> {
     throw new Error('Method not implemented.');
   }
+
 }
