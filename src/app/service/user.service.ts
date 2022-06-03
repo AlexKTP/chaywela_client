@@ -10,12 +10,12 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  private readonly apiUrl: any;
+  private readonly apiUrl: string = "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
 
   users$ = <Observable<CustomResponse>>
-    this.http.get<CustomResponse>('${this.apiUrl}/users/list')
+    this.http.get<CustomResponse>(`${this.apiUrl}/users/list`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
@@ -23,14 +23,14 @@ export class UserService {
 
 
   save$ = (user: User) => <Observable<CustomResponse>>
-    this.http.post<CustomResponse>('${this.apiUrl}/users/save', user)
+    this.http.post<CustomResponse>(`${this.apiUrl}/users/save`, user)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
   delete$ = (userId: number) => <Observable<CustomResponse>>
-    this.http.delete<CustomResponse>('${this.apiUrl}/users/delete/${userId}')
+    this.http.delete<CustomResponse>(`${this.apiUrl}/users/delete/${userId}`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)

@@ -11,26 +11,26 @@ import { Project } from '../models/project';
 })
 export class ProjectService {
 
-  private readonly apiUrl: any;
+  private readonly apiUrl: string = "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
 
   projects$ = <Observable<CustomResponse>>
-    this.http.get<CustomResponse>('${this.apiUrl}/projects/list')
+    this.http.get<CustomResponse>(`${this.apiUrl}/projects/list`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
   save$ = (project: Project) => <Observable<CustomResponse>>
-    this.http.post<CustomResponse>('${this.apiUrl}/projects/save', project)
+    this.http.post<CustomResponse>(`${this.apiUrl}/projects/save`, project)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
   delete$ = (projectId: number) => <Observable<CustomResponse>>
-    this.http.delete<CustomResponse>('${this.apiUrl}/projects/${projectId}')
+    this.http.delete<CustomResponse>(`${this.apiUrl}/projects/${projectId}`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)

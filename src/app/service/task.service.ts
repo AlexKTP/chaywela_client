@@ -11,19 +11,19 @@ import { Task } from '../models/task';
 })
 export class TaskService {
 
-  private readonly apiUrl: any;
+  private readonly apiUrl: string = "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
 
   projects$ = <Observable<CustomResponse>>
-    this.http.get<CustomResponse>('${this.apiUrl}/tasks/list')
+    this.http.get<CustomResponse>(`${this.apiUrl}/tasks/list`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
       )
 
   save$ = (task: Task) => <Observable<CustomResponse>>
-    this.http.post<CustomResponse>('${this.apiUrl}/tasks/list', task)
+    this.http.post<CustomResponse>(`${this.apiUrl}/tasks/list`, task)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
@@ -53,7 +53,7 @@ export class TaskService {
     );
 
   delete$ = (taskId: number) => <Observable<CustomResponse>>
-    this.http.delete<CustomResponse>('${this.apiUrl}/tasks/delete/${taskId}')
+    this.http.delete<CustomResponse>(`${this.apiUrl}/tasks/delete/${taskId}`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)
