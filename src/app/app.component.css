@@ -8,4 +8,11 @@
     background-repeat: no-repeat;
 }
 
+@media  screen and (max-width: 864px) {
+    .mainContainer{
+        background-size: 60%;
+    }
+}
+
+
 

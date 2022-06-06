@@ -1,7 +1,13 @@
 .carousel-inner {
-   min-height: 100%;
-   min-width: 100%;
+   min-height: 100vh;
+   min-width: 100vh;
 }
+
+.carousel-item {
+    max-width: 70%;
+}
+
+
 
 .carousel-indicators .active {
     background-color: #6C63FF;
@@ -18,3 +24,4 @@
 #myCarousel {
     min-height: 100vh;
 }
+

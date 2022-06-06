@@ -3,6 +3,7 @@ import { catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from './enums/data-state.enum';
 import { AppState } from './models/app-state';
 import { CustomResponse } from './models/custom-response';
+import { User } from './models/user';
 import { UserService } from './service/user.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("ngOnInit");
+
     this.appState$ = this.userService.users$
       .pipe(
         map(response => {
@@ -32,6 +34,11 @@ export class AppComponent implements OnInit {
           return of({ dataState: DataState.ERROR_STATE, err })
         }
         ))
+
+
   }
+
+
+
   title = 'chaywela_front';
 }
