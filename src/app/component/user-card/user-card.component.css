@@ -6,10 +6,11 @@
 .card-elevation {
     transform: scale(0.95);
 
-    width: 70%;
+
+    max-width: 50%;
     height: 50vh;
     background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(108, 99, 255, 0.7) 0px 2px 8px 0px;
     border-radius: 30px;
     margin: auto;
 }
@@ -17,6 +18,7 @@
 h1{
     font-weight: bold;
     font-size: medium;
+    text-decoration: underline;
 }
 
 p {
@@ -25,7 +27,7 @@ p {
 
 .card-elevation:hover{
     transform: scale(1.00);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 3px 12px 0px;
+    box-shadow: rgba(108, 99, 255, 0.7) 0px 2px 8px 4px;
 
 }
 .card {
