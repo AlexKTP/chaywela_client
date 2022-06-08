@@ -1,4 +1,9 @@
+
+
 $primary: #6C63FF;
 
-@import "bootstrap";
+$theme-colors: (
+  "primary": $primary,
+);
 
+@import "bootstrap"
