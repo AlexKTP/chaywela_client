@@ -1,12 +1,18 @@
-.carousel-inner  {
-   min-height: 100vh;
-   min-width: 100vh;
+#myCarousel {
    display: flex;
+   flex-direction: column;
+   justify-content: center;
    align-items: center;
- 
+   margin: 0;
+   padding: 0;
+   margin: auto;
 }
 
-
+.carousel-inner {
+    min-width: 90vw;
+    min-height: 90vh;
+    margin: auto;
+}
 
 .carousel-indicators .active {
     background-color: #6C63FF;
@@ -20,7 +26,4 @@
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill=' 6C63FF' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
-#myCarousel {
-    min-height: 100vh;
-}
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomResponse } from 'src/app/models/custom-response';
 import { User } from 'src/app/models/user';
@@ -11,7 +11,14 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class UserCardComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  @Input() id!: number;
+  @Input() bio!: string;
+  @Input() username!: string;
+
+
+
+  constructor() {
+  }
 
   ngOnInit(): void {
 
