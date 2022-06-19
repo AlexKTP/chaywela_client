@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProjectType } from 'src/app/enums/project-type.enum';
+import { Project } from 'src/app/models/project';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
+  @Input() title!: string;
+  @Input() description!: string;
+  @Input() type!: any;
+  @Input() badge!: number;
+
+
+
+  projects: Project[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
+
+
+    const project1: Project = { id: 1, name: "Tracking app", description: "A simple tracking app", projectType: ProjectType.PRIVATE, refUser: 1 };
+    const project2: Project = { id: 2, name: "Blog", description: "A simple blog to document my IT journey", projectType: ProjectType.PRIVATE, refUser: 1 };
+
+    this.projects.push(project1);
+    this.projects.push(project2);
+
+
   }
 
 }

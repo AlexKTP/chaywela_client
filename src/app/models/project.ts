@@ -7,6 +7,6 @@ export interface Project {
     name: string;
     description: string;
     projectType: ProjectType;
-    user: User;
-    
+    refUser: number;
+
 }
