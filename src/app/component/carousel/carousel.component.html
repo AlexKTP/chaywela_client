@@ -1,17 +1,13 @@
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="container">
-        
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" *ngFor="let user of users; let i = index"
             [attr.data-bs-slide-to]="i" [ngClass]="{'active': i===0}" aria-current="true" [attr.aria-label]="'Slide-' + i + 1"></button>
         </div>
         
         <div class="carousel-inner"> 
-            <div class="test">
                 <div id="itemActif" class="carousel-item active" *ngFor="let user of users; let currentIndex = index" [ngClass]="{'active': currentIndex===0}">
-                    <app-user-card  [id]="user.id" [username]="user.username" [bio]="user.bio"></app-user-card>
-                    
-                </div>  
+                    <app-user-card  [id]="user.id" [username]="user.username" [bio]="user.bio"></app-user-card>  
             </div>
         </div>
         

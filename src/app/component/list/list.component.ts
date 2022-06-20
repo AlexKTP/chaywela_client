@@ -5,11 +5,18 @@ import { Project } from 'src/app/models/project';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrls: ['./list.component.css'],
+
 })
 export class ListComponent implements OnInit {
+  // <app-list [listData]='listData' >
 
+  // @Input() listData: ;
   @Input() title!: string;
+  // {title: , 
+  // description: ,
+  // type: ,
+  // badge: }
   @Input() description!: string;
   @Input() type!: any;
   @Input() badge!: number;
