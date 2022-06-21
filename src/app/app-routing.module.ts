@@ -17,6 +17,14 @@ const routes: Routes = [
     component: ListComponent
   },
   {
+    path: 'settings',
+    component: ListComponent
+  },
+  {
+    path: 'clock',
+    component: ListComponent
+  },
+  {
     path: '**',
     redirectTo: 'landing'
   }

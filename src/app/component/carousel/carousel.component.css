@@ -1,9 +1,50 @@
+#myCarousel {
+    min-width: 90vw;
+    min-height: 100vh;
+}
 
+.carte{
+    max-width: 50vw;
+    max-height: 50vh;
+}
 
-.carousel-inner {
+.carte-container{
     min-width: 90vw;
     min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+   
+
 }
+
+.carousel-inner {
+    min-height: 90vh;
+    
+}
+
+
+.carousel-item.active {
+    min-height: 90vh;
+    min-width: 90vw;
+    
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    min-width: 90vw;
+}
+
+
+
+
+
 
 .carousel-indicators button {
     background-color: silver;

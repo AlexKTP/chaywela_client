@@ -1,14 +1,11 @@
+<div class="d-flex flex-row-reverse">
 <nav class="navbar bg-ligh">
-    <div class="container-fluid">
-        <form role="search">
-          <div class="d-flex">
-          <input class="form-control me-auto" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-primary ms-3 me-auto" type="submit">Search</button>
-          </div>
+        <form class="d-flex flex-row mt-5" role="search">
+          <input class="form-control" type="search" placeholder="Chercher un projet" aria-label="Search">
+          <button class="btn btn-outline-primary ms-3" type="submit">Search</button>
         </form>
-      </div>
   </nav>
-
+</div>
 
 <table id="main" class="table table-responsive table-hover mt-5">
     <thead>
@@ -25,7 +22,7 @@
         <th scope="row">{{currentIndex}}</th>
         <td>{{project.name}}</td>
         <td>{{project.description}}</td>
-        <td><span class="badge badge-pill badge-danger"> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
+        <td><span> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
         <td>{{project.refUser}}</td>
       </tr>
     </tbody>

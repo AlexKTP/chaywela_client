@@ -1,18 +1,19 @@
 .card-elevation img {
-    height: 30%;
-    width: 30%;
+    height: 20%;
+    width: 20%;
 }
 
+
+
 .card-elevation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     transform: scale(0.95);
-
-
-    max-width: 50%;
-    height: 50vh;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: rgba(108, 99, 255, 0.7) 0px 2px 8px 0px;
     border-radius: 30px;
-    margin: auto;
 }
 
 h1{

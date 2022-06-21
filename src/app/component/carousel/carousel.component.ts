@@ -17,17 +17,20 @@ export class CarouselComponent implements OnInit {
 
   users: User[] = [];
 
+
   constructor(private userService: UserService) {
 
   }
 
   ngOnInit(): void {
 
+    console.log("user length = " + this.users.length)
     const user1: User = { id: 1, username: 'James', bio: 'My name is Bond' };
     const user2: User = { id: 2, username: 'John', bio: 'Doe' };
 
     this.users.push(user1);
     this.users.push(user2);
+
 
     console.log(this.users)
 
@@ -41,7 +44,9 @@ export class CarouselComponent implements OnInit {
           if (u !== null && u.length > 0) this.users = u;
         },
         error: error => console.log(error),
-        complete: () => console.log("DONE!")
+        complete: () => {
+          console.log('Fetching users done!')
+        }
       })
     );
 
