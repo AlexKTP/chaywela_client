@@ -7,7 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { CarouselComponent } from './component/carousel/carousel.component';
 import { UserCardComponent } from './component/user-card/user-card.component';
-import { ListComponent } from './component/list/list.component'
+import { ListComponent } from './component/list/list.component';
+import { CreateFormComponent } from './component/create-form/create-form.component'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { ListComponent } from './component/list/list.component'
     SidebarComponent,
     CarouselComponent,
     UserCardComponent,
-    ListComponent
+    ListComponent,
+    CreateFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

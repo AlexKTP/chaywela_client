@@ -1,0 +1,9 @@
+#main {
+    min-width: 90vw;
+    min-height: 90vh;
+}
+
+.formContainer {
+    min-width: 60vw;
+    min-height: 50vh;
+}

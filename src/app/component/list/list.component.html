@@ -1,9 +1,12 @@
-<div class="d-flex flex-row-reverse">
-<nav class="navbar bg-ligh">
-        <form class="d-flex flex-row mt-5" role="search">
-          <input class="form-control" type="search" placeholder="Chercher un projet" aria-label="Search">
-          <button class="btn btn-outline-primary ms-3" type="submit">Search</button>
-        </form>
+<div class="d-flex flex-row mt-5">
+<nav class="navbar bg-ligh w-100">
+    <button routerLink="../create" [state]="{ data: {formType:'TASK'}}" class="btn btn-outline-primary ms-3">CREATE</button>
+    <div >
+    <form class="d-flex flex-row" role="search">
+      <input id="request" class="form-control" type="search" placeholder="Chercher un projet" aria-label="Search" [(ngModel)]="request" name="request">
+      <button class="btn btn-outline-primary ms-3" type="submit" (click)="onSend()">Search</button>
+    </form>
+  </div>        
   </nav>
 </div>
 
@@ -22,7 +25,7 @@
         <th scope="row">{{currentIndex}}</th>
         <td>{{project.name}}</td>
         <td>{{project.description}}</td>
-        <td><span> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
+        <td><span [ngStyle]="{'color': project.projectType === 0 ? 'purple' : 'red'}"> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
         <td>{{project.refUser}}</td>
       </tr>
     </tbody>

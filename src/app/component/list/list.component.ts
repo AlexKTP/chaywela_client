@@ -23,6 +23,7 @@ export class ListComponent implements OnInit {
 
 
 
+  request!: string;
   projects: Project[] = [];
 
   constructor() { }
@@ -37,6 +38,10 @@ export class ListComponent implements OnInit {
     this.projects.push(project2);
 
 
+  }
+
+  onSend(): void {
+    console.log("voici le texte recupérer : " + this.request);
   }
 
 }

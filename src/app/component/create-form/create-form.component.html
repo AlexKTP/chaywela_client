@@ -1,0 +1,21 @@
+<div id="main" class="d-flex flex-column align-items-center justify-content-center">
+    <div class="formContainer">
+        <div *ngIf="type === 'PROJECT'" class="d-flex flex-row justify-content-center align-items-center h1 text-light bg-primary my-3 py-3 w-100 ">New Project</div>
+        <div *ngIf="type === 'TASK'" class="d-flex flex-row justify-content-center align-items-center h1 text-light bg-primary my-3 py-3 w-100 ">New Task</div>
+        <div >
+            <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Title</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="Title">
+        </div>
+        <div class="mt-4">
+            <label for="exampleFormControlTextarea1" class="form-label h3 text-secondary">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write a description..."></textarea>
+        </div>
+        <div class="mt-5">
+        <select class="form-select bg-white text-secondary" aria-label="Type">
+            <option selected>Project Type</option>
+            <option value="0">PRIVATE</option>
+            <option value="1">PROFESSIONNAL</option>
+          </select>
+        </div>
+    </div>
+</div>

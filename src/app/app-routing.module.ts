@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarouselComponent } from './component/carousel/carousel.component';
+import { CreateFormComponent } from './component/create-form/create-form.component';
 import { ListComponent } from './component/list/list.component';
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'clock',
     component: ListComponent
+  },
+  {
+    path: 'create',
+    component: CreateFormComponent
   },
   {
     path: '**',
