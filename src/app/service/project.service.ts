@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { partitionArray } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ProjectType } from '../enums/project-type.enum';
 import { CustomResponse } from '../models/custom-response';
@@ -59,6 +60,16 @@ export class ProjectService {
       tap(console.log),
       catchError(this.handleError)
     );
+
+    search$ = (request: string) => {
+      let body = new HttpParams();
+      body = body.set('request', request);
+      return <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.apiUrl}/projects/search`, {params: body})
+        .pipe(
+          tap(console.log),
+          catchError(this.handleError)
+        );
+    }
 
 
   handleError(err: any): Observable<never> {

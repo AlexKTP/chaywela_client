@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -58,6 +58,16 @@ export class TaskService {
         tap(console.log),
         catchError(this.handleError)
       )
+
+  search$ = (request: string) => {
+    let body = new HttpParams();
+    body = body.set('request', request);
+    return <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.apiUrl}/tasks/search`, { params: body })
+      .pipe(
+        tap(console.log),
+        catchError(this.handleError)
+      );
+  }
 
   handleError(err: any): Observable<never> {
     throw new Error('Method not implemented.');

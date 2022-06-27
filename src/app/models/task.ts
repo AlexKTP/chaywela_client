@@ -11,6 +11,6 @@ export interface Task {
     difficulty: number;
     progress: number;
     estimatedTime: number;
-    project: Project;
+    project: number;
     
 }
