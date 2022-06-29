@@ -1,6 +1,6 @@
 <div class="d-flex flex-row mt-5">
 <nav class="navbar bg-ligh w-100">
-    <button routerLink="../create" [state]="{ data: {formType:'TASK'}}" class="btn btn-outline-primary ms-3">CREATE</button>
+    <button [routerLink]="['/create']" [state]="{ data: {formType:'TASK'}}" class="btn btn-outline-primary ms-3">CREATE</button>
     <div >
     <form class="d-flex flex-row" role="search">
       <input id="request" class="form-control" type="search" placeholder="Chercher un projet" aria-label="Search" [(ngModel)]="request" name="request">
@@ -13,21 +13,49 @@
 <table id="main" class="table table-responsive table-hover mt-5">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Project</th>
-        <th scope="col">Description</th>
-        <th scope="col">Type</th>
-        <th scope="col">User</th>
+        <ng-container *ngIf="projects.length>0">
+          <th scope="col">#</th>
+          <th scope="col">Project</th>
+          <th scope="col">Description</th>
+          <th scope="col">Type</th>
+          <th scope="col">User</th>
+        </ng-container>
+        <ng-container *ngIf="tasks.length>0">
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Difficulty</th>
+          <th scope="col">Progress</th>
+          <th scope="col">EstimatedTime</th>
+          <th scope="col">Project</th>
+        </ng-container>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let project of projects; let currentIndex = index">
-        <th scope="row">{{currentIndex}}</th>
-        <td>{{project.name}}</td>
-        <td>{{project.description}}</td>
-        <td><span [ngStyle]="{'color': project.projectType === 0 ? 'purple' : 'red'}"> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
-        <td>{{project.refUser}}</td>
-      </tr>
+      <ng-container *ngIf="projects.length>0">
+        <tr *ngFor="let project of projects; let currentIndex = index" [routerLink]="['../projects', project.id, 'tasks' ]">
+          <th scope="row">{{project.id}}</th>
+          <td>{{project.name}}</td>
+          <td>{{project.description}}</td>
+          <td><span [ngStyle]="{'color': project.projectType === 0 ? 'purple' : 'red'}"> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
+          <td class="text-center">{{project.refUser}}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="tasks.length>0">
+        <tr *ngFor="let task of tasks; let currentIndex = index">
+          <th scope="row">{{task.id}}</th>
+          <td [ngStyle]="isFinished(task.status)">{{task.title}}</td>
+          <td [ngStyle]="isFinished(task.status)">{{task.description}}</td>
+          <td [ngStyle]="isFinished(task.status)" ><span [ngStyle]="onStyleTask(task.status)">{{task.status}}</span></td>
+          <td [ngStyle]="isFinished(task.status)" class="text-center">{{task.duration}}</td>
+          <td [ngStyle]="isFinished(task.status)" class="text-center">{{task.difficulty}}</td>
+          <td [ngStyle]="isFinished(task.status)" class="text-center">{{task.progress}}</td>
+          <td [ngStyle]="isFinished(task.status)" class="text-center">{{task.estimatedTime}}</td>
+          <td [ngStyle]="isFinished(task.status)" class="text-center">{{task.project}}</td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
   

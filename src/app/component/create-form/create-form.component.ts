@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { FormType } from 'src/app/enums/form-type.enum';
+import { ListType } from 'src/app/enums/list-type.enum';
 
 @Component({
   selector: 'app-create-form',
@@ -10,7 +10,7 @@ import { FormType } from 'src/app/enums/form-type.enum';
 })
 export class CreateFormComponent implements OnInit {
 
-  @Input() type!: FormType;
+  @Input() type!: ListType;
 
   state$!: Observable<string>;
 

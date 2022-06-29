@@ -15,7 +15,7 @@
             
             <div class="carousel-inner" > 
                 <div class="carousel-item active" *ngFor="let user of users; let currentIndex = index" [ngClass]="{'active': currentIndex===0}">
-                    <div class="carte-container">
+                    <div class="carte-container" [routerLink]="['/users', user.id, 'projects']">
                         <div class="carte">
                             <app-user-card [id]="user.id" [username]="user.username" [bio]="user.bio"></app-user-card>  
                         </div> 

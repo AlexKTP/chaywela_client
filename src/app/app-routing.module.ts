@@ -6,12 +6,23 @@ import { ListComponent } from './component/list/list.component';
 
 const routes: Routes = [
   {
-    path: 'landing',
-    component: CarouselComponent
+    path: 'users',
+    children: [
+      { path: '', component: CarouselComponent },
+      {
+        path: ":idUser/projects", children: [
+          { path: '', component: ListComponent },
+          { path: ':idProject/tasks', component: ListComponent }
+        ]
+      }
+    ]
   },
   {
     path: 'projects',
-    component: ListComponent
+    children: [
+      { path: '', component: ListComponent },
+      { path: ":idProject/tasks", component: ListComponent }
+    ]
   },
   {
     path: 'tasks',
@@ -19,11 +30,11 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: ListComponent
+    component: CarouselComponent
   },
   {
     path: 'clock',
-    component: ListComponent
+    component: CarouselComponent
   },
   {
     path: 'create',
@@ -31,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'landing'
+    redirectTo: 'users'
   }
 ];
 

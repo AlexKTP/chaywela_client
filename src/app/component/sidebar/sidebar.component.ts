@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListType } from 'src/app/enums/list-type.enum';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+
+  public listTypes = ListType;
+
 
   constructor() { }
 

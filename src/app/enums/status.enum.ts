@@ -1,6 +1,6 @@
 export enum Status {
-    STARTED,
-    PAUSED,
-    CANCELED,
-    FINISHED
+    STARTED = 'STARTED',
+    PAUSED = 'PAUSED',
+    CANCELED = 'CANCELED',
+    FINISHED = 'FINISHED'
 }
