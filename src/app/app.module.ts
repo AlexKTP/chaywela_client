@@ -10,6 +10,7 @@ import { UserCardComponent } from './component/user-card/user-card.component';
 import { ListComponent } from './component/list/list.component';
 import { CreateFormComponent } from './component/create-form/create-form.component'
 import { FormsModule } from '@angular/forms';
+import { SettingsComponent } from './component/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     CarouselComponent,
     UserCardComponent,
     ListComponent,
-    CreateFormComponent
+    CreateFormComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

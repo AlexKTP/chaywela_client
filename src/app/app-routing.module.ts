@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CarouselComponent } from './component/carousel/carousel.component';
 import { CreateFormComponent } from './component/create-form/create-form.component';
 import { ListComponent } from './component/list/list.component';
+import { SettingsComponent } from './component/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: CarouselComponent
+    component: SettingsComponent
   },
   {
     path: 'clock',
