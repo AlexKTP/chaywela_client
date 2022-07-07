@@ -1,8 +1,7 @@
 import { Status } from "../enums/status.enum";
-import { Project } from "./project";
 
 export interface Task {
-    
+
     id: number;
     title: string;
     description: string;
@@ -12,5 +11,5 @@ export interface Task {
     progress: number;
     estimatedTime: number;
     project: number;
-    
+
 }

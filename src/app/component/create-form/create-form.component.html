@@ -10,12 +10,38 @@
             <label for="exampleFormControlTextarea1" class="form-label h3 text-secondary">Description</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write a description..."></textarea>
         </div>
-        <div class="mt-5">
-        <select class="form-select bg-white text-secondary" aria-label="Type">
-            <option selected>Project Type</option>
-            <option value="0">PRIVATE</option>
-            <option value="1">PROFESSIONNAL</option>
-          </select>
+        <div *ngIf="type === 'PROJECT'" class="mt-5">
+            <select class="form-select bg-white text-secondary" aria-label="Type">
+                <option selected>Project Type</option>
+                <option value="0">PRIVATE</option>
+                <option value="1">PROFESSIONNAL</option>
+            </select>
+        </div>
+        <div *ngIf="type === 'TASK'" class="mt-4">
+            <div >
+                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Duration</label>
+                <input class="form-control" id="exampleFormControlInput1" placeholder="Duration">
+            </div>
+            <div class="mt-4" >
+                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Difficulty</label>
+                <input class="form-control" id="exampleFormControlInput1" placeholder="Difficulty">
+            </div>
+            <div class="mt-4">
+                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Estimated Time</label>
+                <input class="form-control" id="exampleFormControlInput1" placeholder="Estimated Time">
+            </div>
+            <div class="mt-4">
+                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Select the project</label>
+                <select class="form-select bg-white text-secondary" aria-label="Project">
+                    <option selected>Projects</option>
+                    <option value="0">PRIVATE</option>
+                    <option value="1">PROFESSIONNAL</option>
+                </select>
+            </div>
         </div>
     </div>
+    <div class="d-flex justify-content-end mt-5">
+        <button class="btn btn-outline-primary">CREATE</button>
+    </div>
 </div>
+

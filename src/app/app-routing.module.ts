@@ -31,14 +31,17 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    children: [
+      { path: '', component: SettingsComponent },
+      { path: ":idUser/tasks", component: SettingsComponent }
+    ]
   },
   {
     path: 'clock',
     component: CarouselComponent
   },
   {
-    path: 'create',
+    path: 'create/:type',
     component: CreateFormComponent
   },
   {

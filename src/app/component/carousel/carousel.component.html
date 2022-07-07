@@ -1,5 +1,4 @@
-<div *ngIf="users.length>0" class="container">
-    
+<div *ngIf="(appState$ | async)?.data != undefined && users.length>0" class="container">
     <div  id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         
         <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">

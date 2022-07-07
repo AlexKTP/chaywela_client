@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ListType } from 'src/app/enums/list-type.enum';
 
 @Component({
@@ -10,17 +9,18 @@ import { ListType } from 'src/app/enums/list-type.enum';
 })
 export class CreateFormComponent implements OnInit {
 
-  @Input() type!: ListType;
+  type!: ListType;
 
-  state$!: Observable<string>;
 
-  public routeData: any;
 
-  constructor(private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    console.log(">>>>>>>>> type: " + this.router.getCurrentNavigation()?.extras.state)
+    this.activatedRoute.params.forEach((params: Params) => {
+      this.type = params['type'];
+      console.log('>>>>>' + this.type);
+    });
   }
 
 }

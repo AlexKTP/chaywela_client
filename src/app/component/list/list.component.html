@@ -1,6 +1,6 @@
 <div class="d-flex flex-row mt-5">
 <nav class="navbar bg-ligh w-100">
-    <button [routerLink]="['/create']" [state]="{ data: {formType:'TASK'}}" class="btn btn-outline-primary ms-3">CREATE</button>
+    <button [routerLink]="['/create', projects.length>0 ? 'PROJECT' : 'TASK']" class="btn btn-outline-primary ms-3">CREATE</button>
     <div >
     <form class="d-flex flex-row" role="search">
       <input id="request" class="form-control" type="search" placeholder="Chercher un projet" aria-label="Search" [(ngModel)]="request" name="request">

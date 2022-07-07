@@ -17,7 +17,15 @@ export class UserService {
   users$ = <Observable<CustomResponse>>
     this.http.get<CustomResponse>(`${this.apiUrl}/users/list`)
       .pipe(
-        tap(console.log),
+        tap({
+          next: value => {
+            console.log("on est dans tap de user service " + value);
+          },
+          error: error => console.log(error),
+          complete: () => {
+            console.log('Fetching users done!')
+          }
+        }),
         catchError(this.handleError)
       )
 
