@@ -15,7 +15,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  projects$ = <Observable<CustomResponse>>
+  tasks$ = <Observable<CustomResponse>>
     this.http.get<CustomResponse>(`${this.apiUrl}/tasks/list`)
       .pipe(
         tap(console.log),
@@ -39,9 +39,9 @@ export class TaskService {
             ...response,
             message: 'Tasks filtered by ${status} status',
             data: {
-              objList: response.data.objList.filter(
-                task => task.status === status
-              )
+              objList: response.data.objList.filter((task): task is Task => {
+                return (task as Task).status === status;
+              })
             }
           }
         );

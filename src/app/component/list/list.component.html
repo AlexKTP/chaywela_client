@@ -1,6 +1,6 @@
 <div class="d-flex flex-row mt-5">
 <nav class="navbar bg-ligh w-100">
-    <button [routerLink]="['/create', projects.length>0 ? 'PROJECT' : 'TASK']" class="btn btn-outline-primary ms-3">CREATE</button>
+    <button [routerLink]="['/create', projects != null && projects.length>0 ? 'PROJECT' : 'TASK']" class="btn btn-outline-primary ms-3">CREATE</button>
     <div >
     <form class="d-flex flex-row" role="search">
       <input id="request" class="form-control" type="search" placeholder="Chercher un projet" aria-label="Search" [(ngModel)]="request" name="request">
@@ -13,7 +13,7 @@
 <table id="main" class="table table-responsive table-hover mt-5">
     <thead>
       <tr>
-        <ng-container *ngIf="projects.length>0">
+        <ng-container *ngIf="projects != null && projects.length>0">
           <th scope="col">#</th>
           <th scope="col">Project</th>
           <th scope="col">Description</th>
@@ -21,7 +21,7 @@
           <th scope="col">User</th>
           <th scope="col"></th>
         </ng-container>
-        <ng-container *ngIf="tasks.length>0">
+        <ng-container *ngIf="tasks != null && tasks.length>0">
           <th scope="col">#</th>
           <th scope="col">Title</th>
           <th scope="col">Description</th>
@@ -36,12 +36,12 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="projects.length>0">
+      <ng-container *ngIf="projects != null && projects.length>0">
         <tr *ngFor="let project of projects; let currentIndex = index">
           <th scope="row" [routerLink]="['../projects', project.id, 'tasks' ]">{{project.id}}</th>
           <td [routerLink]="['../projects', project.id, 'tasks' ]">{{project.name}}</td>
           <td [routerLink]="['../projects', project.id, 'tasks' ]">{{project.description}}</td>
-          <td [routerLink]="['../projects', project.id, 'tasks' ]"><span [ngStyle]="{'color': project.projectType === 0 ? 'purple' : 'red'}"> {{project.projectType === 0 ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
+          <td [routerLink]="['../projects', project.id, 'tasks' ]"><span [ngStyle]="{'color': project.projectType === 'PRIVATE' ? 'purple' : 'red'}"> {{project.projectType === 'PRIVATE' ? 'PRIVATE': 'PROFESSIONNAL'}}</span></td>
           <td [routerLink]="['../projects', project.id, 'tasks' ]" class="text-center">{{project.refUser}}</td>
           <td  class="text-center">
             <svg href="#exampleModalToggle" xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" data-bs-whatever="@mdo" width="16" height="16" fill="#6C63FF" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -98,7 +98,7 @@
           </div>
         </tr>
       </ng-container>
-      <ng-container *ngIf="tasks.length>0">
+      <ng-container *ngIf="tasks != null && tasks.length>0">
         <tr *ngFor="let task of tasks; let currentIndex = index">
           <th scope="row">{{task.id}}</th>
           <td [ngStyle]="isFinished(task.status)">{{task.title}}</td>

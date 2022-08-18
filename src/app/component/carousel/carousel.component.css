@@ -15,21 +15,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-   
-
 }
 
 .carousel-inner {
     min-height: 90vh;
-    
 }
 
 
 .carousel-item.active {
     min-height: 90vh;
-    min-width: 90vw;
-    
+    min-width: 90vw; 
 }
 
 .empty {

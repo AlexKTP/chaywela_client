@@ -19,7 +19,15 @@ export class ProjectService {
   projects$ = <Observable<CustomResponse>>
     this.http.get<CustomResponse>(`${this.apiUrl}/projects/list`)
       .pipe(
-        tap(console.log),
+        tap({
+          next: value => {
+            console.log("on est dans tap de project service " + value);
+          },
+          error: error => console.log(error),
+          complete: () => {
+            console.log('Fetching project done!')
+          }
+        }),
         catchError(this.handleError)
       )
 
@@ -48,9 +56,9 @@ export class ProjectService {
             ...response,
             message: 'Projects filtered by ${type} type',
             data: {
-              objList: response.data.objList.filter(
-                project => project.projectType === type
-              )
+              objList: response.data.objList.filter((project): project is Project => {
+                return (project as Project).projectType == type;
+              })
             }
           }
         );
@@ -61,18 +69,19 @@ export class ProjectService {
       catchError(this.handleError)
     );
 
-    search$ = (request: string) => {
-      let body = new HttpParams();
-      body = body.set('request', request);
-      return <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.apiUrl}/projects/search`, {params: body})
-        .pipe(
-          tap(console.log),
-          catchError(this.handleError)
-        );
-    }
+  search$ = (request: string) => {
+    let body = new HttpParams();
+    body = body.set('request', request);
+    return <Observable<CustomResponse>>this.http.get<CustomResponse>(`${this.apiUrl}/projects/search`, { params: body })
+      .pipe(
+        tap(console.log),
+        catchError(this.handleError)
+      );
+  }
 
 
   handleError(err: any): Observable<never> {
+    console.log('voici erreur soulevee: ' + err)
     throw new Error('Method not implemented.');
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ListType } from 'src/app/enums/list-type.enum';
 import { ProjectType } from 'src/app/enums/project-type.enum';
 import { Status } from 'src/app/enums/status.enum';
@@ -32,6 +32,10 @@ export class ListComponent implements OnInit {
   statusType = Status;
   idUser!: number;
   idProject!: number;
+  appState$!: Observable<CustomResponse>;
+  projectNumber!: number;
+  taskNumber!: number;
+
 
 
   constructor(
@@ -54,48 +58,93 @@ export class ListComponent implements OnInit {
     switch (this.router.url.split('/').pop()) {
 
       case 'projects':
-        console.log("on ajoute les projects");
-        const project1: Project = { id: 1, name: "Tracking app", description: "A simple tracking app", projectType: ProjectType.PRIVATE, refUser: 1 };
-        const project2: Project = { id: 2, name: "Blog", description: "A simple blog to document my IT journey", projectType: ProjectType.PRIVATE, refUser: 2 };
-        this.projectsNonFiltered.push(project1);
-        this.projectsNonFiltered.push(project2);
+        this.initProject();
         break
       case 'tasks':
-        console.log("on ajoute les taches");
-        const task1: Task = { id: 1, title: "Create an http request with parameters", description: "an user could search a task or a project in the list by using the form request", status: Status.PAUSED, duration: 0, difficulty: 2, progress: 0, estimatedTime: 60, project: 1 };
-        const task2: Task = { id: 2, title: "Handling http parameters - Backend", description: "an user could search a task or a project in the list by using the form request", status: Status.FINISHED, duration: 0, difficulty: 2, progress: 0, estimatedTime: 90, project: 2 };
-        this.tasksNonFiltered.push(task1);
-        this.tasksNonFiltered.push(task2);
+        this.initTask();
         break;
     }
 
 
 
 
-    if (this.idProject != undefined && this.tasksNonFiltered.length > 0) {
-      console.log("voici l'id project :" + this.idProject)
-      this.tasks = this.tasksNonFiltered.filter((task) => {
-        return task.project == this.idProject;
-      });
+    /*  if (this.idProject != undefined && this.tasksNonFiltered.length > 0) {
+        console.log("voici l'id project :" + this.idProject)
+        this.tasks = this.tasksNonFiltered.filter((task) => {
+          return task.project == this.idProject;
+        });
+  
+        console.log(this.projects)
+  
+      } else if (this.tasksNonFiltered.length > 0) {
+        this.tasks = this.tasksNonFiltered;
+      }
+  
+  
+      if (this.idUser != undefined && this.projectsNonFiltered.length > 0) {
+        this.projects = this.projectsNonFiltered.filter((project) => {
+          return project.refUser == this.idUser;
+        });
+  
+        console.log(this.projects)
+  
+      } else if (this.projectsNonFiltered.length > 0) {
+        this.projects = this.projectsNonFiltered;
+      }*/
 
-      console.log(this.projects)
+  }
 
-    } else if (this.tasksNonFiltered.length > 0) {
-      this.tasks = this.tasksNonFiltered;
-    }
+  initProject() {
+    this.appState$ = this.projectService.projects$.pipe(
+      tap({
+        next: value => {
+          console.log("on est la pipe du project service " + value);
+          console.log('voici value.data ' + value.data)
+          this.projects = value.data.objList as Project[];
+          this.projectNumber = this.projects != undefined ? this.projects.length : -1;
+        },
+        error: error => console.log(error),
+        complete: () => {
+          console.log('Fetching project done with' + this.projectNumber + 'retrieved!')
+        }
+      })
+    );
 
+    this.appState$.subscribe(
+      {
+        complete: () => {
+          for (let u in this.projects) {
+            console.log('Project detail: ' + u)
+          }
+        }
+      }
+    );
+  }
 
-    if (this.idUser != undefined && this.projectsNonFiltered.length > 0) {
-      this.projects = this.projectsNonFiltered.filter((project) => {
-        return project.refUser == this.idUser;
-      });
+  initTask() {
+    this.appState$ = this.taskService.tasks$.pipe(
+      tap({
+        next: value => {
+          console.log("on est la pipe du task service " + value);
+          this.tasks = (value.data.objList) as Task[]
+          this.taskNumber = this.tasks != undefined ? this.tasks.length : -1;
+        },
+        error: error => console.log(error),
+        complete: () => {
+          console.log('Fetching tasks done!')
+        }
+      })
+    );
 
-      console.log(this.projects)
-
-    } else if (this.projectsNonFiltered.length > 0) {
-      this.projects = this.projectsNonFiltered;
-    }
-
+    this.appState$.subscribe(
+      {
+        complete: () => {
+          for (let u in this.tasks) {
+            console.log('Task: ' + u)
+          }
+        }
+      }
+    );
   }
 
   onSend(): void {

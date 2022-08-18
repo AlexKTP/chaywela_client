@@ -8,6 +8,6 @@ export interface CustomResponse {
     reason: string;
     message: string;
     developerMessage: string;
-    data: { objList?: User[] | Task[] | Project[], obj?: User | Task | Project }
+    data: { objList?: Array<User | Project | Task>, obj?: User | Task | Project }
 
 }

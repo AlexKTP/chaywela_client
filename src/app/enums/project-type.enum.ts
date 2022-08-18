@@ -1,3 +1,4 @@
 export enum ProjectType {
-    PRIVATE, PROFESSIONAL
+    PRIVATE = 'PRIVATE',
+    PROFESSIONAL = 'PROFESSIONAL'
 }

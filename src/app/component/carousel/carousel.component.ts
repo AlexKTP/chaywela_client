@@ -17,10 +17,7 @@ export class CarouselComponent implements OnInit {
 
   users: User[] = [];
 
-
-  constructor(private userService: UserService) {
-
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
 
@@ -47,7 +44,6 @@ export class CarouselComponent implements OnInit {
         }
       }
     );
-
 
   }
 

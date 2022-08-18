@@ -19,7 +19,7 @@ export class UserService {
       .pipe(
         tap({
           next: value => {
-            console.log("on est dans tap de user service " + value);
+            console.log(value);
           },
           error: error => console.log(error),
           complete: () => {
