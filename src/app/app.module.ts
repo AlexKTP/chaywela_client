@@ -9,7 +9,7 @@ import { CarouselComponent } from './component/carousel/carousel.component';
 import { UserCardComponent } from './component/user-card/user-card.component';
 import { ListComponent } from './component/list/list.component';
 import { CreateFormComponent } from './component/create-form/create-form.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './component/settings/settings.component';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { SettingsComponent } from './component/settings/settings.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

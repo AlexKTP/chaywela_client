@@ -160,6 +160,8 @@ export class ListComponent implements OnInit {
     )
   }
 
+
+
   isFinished(status: Status): Object {
 
     let result: Object = {};
