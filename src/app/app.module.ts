@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { forwardRef, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,7 +9,7 @@ import { CarouselComponent } from './component/carousel/carousel.component';
 import { UserCardComponent } from './component/user-card/user-card.component';
 import { ListComponent } from './component/list/list.component';
 import { CreateFormComponent } from './component/create-form/create-form.component'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './component/settings/settings.component';
 
 @NgModule({
@@ -29,7 +29,13 @@ import { SettingsComponent } from './component/settings/settings.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => CreateFormComponent),
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

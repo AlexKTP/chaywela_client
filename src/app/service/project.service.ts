@@ -39,7 +39,7 @@ export class ProjectService {
       )
 
   delete$ = (projectId: number) => <Observable<CustomResponse>>
-    this.http.delete<CustomResponse>(`${this.apiUrl}/projects/${projectId}`)
+    this.http.delete<CustomResponse>(`${this.apiUrl}/projects/project/delete/${projectId}`)
       .pipe(
         tap(console.log),
         catchError(this.handleError)

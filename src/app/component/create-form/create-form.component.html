@@ -11,11 +11,25 @@
             <textarea   formControlName="description" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write a description..." required></textarea>
         </div>
         <div *ngIf="type === 'PROJECT'" class="mt-5">
-            <select   formControlName="projectType" class="form-select bg-white text-secondary" aria-label="Type" required>
-                <option selected>Project Type</option>
-                <option value="0">PRIVATE</option>
-                <option value="1">PROFESSIONNAL</option>
-            </select>
+            <div class="mt-4">
+                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Select the project</label>
+                <select formControlName="projectType"  class="form-select bg-white text-secondary" aria-label="Project" required>
+                    <option selected>Projects</option>
+                    <option value="0">PRIVATE</option>
+                    <option value="1">PROFESSIONNAL</option>
+                </select>
+            </div>
+            <div class="mt-4">
+                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Select the user in charge</label>
+            <select  (ngModel)="userList" class="form-select bg-white text-secondary" aria-label="Project" formControlName="refUser" ngDefaultControl required>
+                    <option
+                      *ngFor="let user of userList"
+                      [ngValue]="user.id"
+                    >
+                      {{ user.username }}
+                    </option>
+              </select>
+        </div>
         </div>
         <div *ngIf="type === 'TASK'" class="mt-4">
             <div >

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
@@ -194,6 +195,26 @@ export class ListComponent implements OnInit {
     }
     return result;
 
+  }
+
+
+  deleteProject(projectId: number) {
+    console.log("voici l'id a delete : " + projectId);
+    this.projects$ = this.projectService.delete$(projectId);
+    this.projects$.subscribe({
+      next: (value) => this.projects = value.data.objList as Project[],
+      error: error => console.log(error),
+      complete: () => {
+        console.log('DeleteDone!')
+        this.router.navigate(['/', 'projects']);
+        //location.reload();
+      }
+    }
+    )
+  }
+
+  console(id: number) {
+    console.log(id);
   }
 
 }
