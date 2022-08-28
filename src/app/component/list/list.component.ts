@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { ListType } from 'src/app/enums/list-type.enum';
@@ -8,8 +9,12 @@ import { Status } from 'src/app/enums/status.enum';
 import { CustomResponse } from 'src/app/models/custom-response';
 import { Project } from 'src/app/models/project';
 import { Task } from 'src/app/models/task';
+import { User } from 'src/app/models/user';
+import { DataService } from 'src/app/service/data-service.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TaskService } from 'src/app/service/task.service';
+import { UserService } from 'src/app/service/user.service';
+
 
 @Component({
   selector: 'app-list',
@@ -25,7 +30,6 @@ export class ListComponent implements OnInit {
   request!: string;
   projects: Project[] = [];
   projectsNonFiltered: Project[] = [];
-  projects$!: Observable<CustomResponse>;
   tasks: Task[] = [];
   tasksNonFiltered: Task[] = [];
   tasks$!: Observable<CustomResponse>
@@ -36,14 +40,38 @@ export class ListComponent implements OnInit {
   appState$!: Observable<CustomResponse>;
   projectNumber!: number;
   taskNumber!: number;
+  users$!: Observable<CustomResponse>;
+  userList: [] = [];
+  project: Project = {} as Project;
+  projects$!: Observable<CustomResponse>;
 
+  response = {
+    id: null,
+    name: null,
+    description: null,
+    user: null
+  }
+
+
+  projectForm = this.formBuilder.group({
+    id: null,
+    name: null,
+    description: null,
+    projectType: null,
+    refUser: null
+  });
+
+
+  projectTypes: any = ProjectType;
 
 
   constructor(
     private projectService: ProjectService,
     private taskService: TaskService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -67,31 +95,51 @@ export class ListComponent implements OnInit {
     }
 
 
+    this.users$ = this.userService.users$.pipe(
+      tap({
+        next: value => {
+          this.userList = [];
+          this.userList = (value.data.objList) as [];
+          this.userList.forEach(u => u as User);
+        },
+        error: error => console.log(error),
+        complete: () => {
+          console.log('Fetching users done!')
+        }
+      })
+    );
+
+    this.users$.subscribe({
+      complete: () => {
+      }
+    });
+
+
 
 
     /*  if (this.idProject != undefined && this.tasksNonFiltered.length > 0) {
-        console.log("voici l'id project :" + this.idProject)
-        this.tasks = this.tasksNonFiltered.filter((task) => {
-          return task.project == this.idProject;
-        });
-  
-        console.log(this.projects)
-  
-      } else if (this.tasksNonFiltered.length > 0) {
-        this.tasks = this.tasksNonFiltered;
-      }
-  
-  
-      if (this.idUser != undefined && this.projectsNonFiltered.length > 0) {
-        this.projects = this.projectsNonFiltered.filter((project) => {
-          return project.refUser == this.idUser;
-        });
-  
-        console.log(this.projects)
-  
-      } else if (this.projectsNonFiltered.length > 0) {
-        this.projects = this.projectsNonFiltered;
-      }*/
+      console.log("voici l'id project :" + this.idProject)
+      this.tasks = this.tasksNonFiltered.filter((task) => {
+        return task.project == this.idProject;
+      });
+      
+      console.log(this.projects)
+      
+    } else if (this.tasksNonFiltered.length > 0) {
+      this.tasks = this.tasksNonFiltered;
+    }
+    
+    
+    if (this.idUser != undefined && this.projectsNonFiltered.length > 0) {
+      this.projects = this.projectsNonFiltered.filter((project) => {
+        return project.refUser == this.idUser;
+      });
+      
+      console.log(this.projects)
+      
+    } else if (this.projectsNonFiltered.length > 0) {
+      this.projects = this.projectsNonFiltered;
+    }*/
 
   }
 
@@ -111,6 +159,7 @@ export class ListComponent implements OnInit {
       })
     );
 
+
     this.appState$.subscribe(
       {
         complete: () => {
@@ -120,6 +169,8 @@ export class ListComponent implements OnInit {
         }
       }
     );
+
+    this.projectForm.controls
   }
 
   initTask() {
@@ -199,6 +250,7 @@ export class ListComponent implements OnInit {
 
 
   deleteProject(projectId: number) {
+
     console.log("voici l'id a delete : " + projectId);
     this.projects$ = this.projectService.delete$(projectId);
     this.projects$.subscribe({
@@ -207,14 +259,40 @@ export class ListComponent implements OnInit {
       complete: () => {
         console.log('DeleteDone!')
         this.router.navigate(['/', 'projects']);
-        //location.reload();
+        location.reload();
       }
     }
     )
   }
 
+  onSubmit(form: any) {
+
+    form.value.projectType = form.value.projectType == 'PRIVATE' ? 0 : 1;
+
+    this.project = { ...form.value }
+
+    this.projects$ = this.projectService.save$(this.project);
+    this.projects$.subscribe({
+      next: (value) => this.project = value.data.obj as Project,
+      error: error => console.log(error),
+      complete: () => {
+        console.log('Creation project done!')
+        this.router.navigate(['/', 'projects']);
+        this.projectForm.reset();
+        location.reload();
+      }
+    })
+  }
+
   console(id: number) {
     console.log(id);
   }
+
+
+  keys(): Array<string> {
+    var keys = Object.keys(this.projectTypes);
+    return keys.slice(keys.length / 2);
+  }
+
 
 }

@@ -29,7 +29,7 @@ export class CreateFormComponent implements OnInit {
     name: null,
     description: null,
     projectType: null,
-    refUser: null
+    userId: null
   });
 
   taskForm = this.formBuilder.group({
@@ -92,6 +92,7 @@ export class CreateFormComponent implements OnInit {
         console.log('Creation project done!')
         this.router.navigate(['/', 'projects']);
         console.log(this.projectForm.reset);
+        location.reload();
       }
     })
 

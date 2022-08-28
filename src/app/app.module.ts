@@ -17,8 +17,8 @@ import { SettingsComponent } from './component/settings/settings.component';
     AppComponent,
     SidebarComponent,
     CarouselComponent,
-    UserCardComponent,
     ListComponent,
+    UserCardComponent,
     CreateFormComponent,
     SettingsComponent
   ],
@@ -27,8 +27,7 @@ import { SettingsComponent } from './component/settings/settings.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

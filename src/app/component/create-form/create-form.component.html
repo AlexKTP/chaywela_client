@@ -21,40 +21,40 @@
             </div>
             <div class="mt-4">
                 <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Select the user in charge</label>
-            <select  (ngModel)="userList" class="form-select bg-white text-secondary" aria-label="Project" formControlName="refUser" ngDefaultControl required>
+                <select  (ngModel)="userList" class="form-select bg-white text-secondary" aria-label="Project" formControlName="refUser" ngDefaultControl required>
                     <option
-                      *ngFor="let user of userList"
-                      [ngValue]="user.id"
+                    *ngFor="let user of userList"
+                    [ngValue]="user.id"
                     >
-                      {{ user.username }}
-                    </option>
-              </select>
-        </div>
-        </div>
-        <div *ngIf="type === 'TASK'" class="mt-4">
-            <div >
-                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Duration</label>
-                <input class="form-control" id="exampleFormControlInput1" placeholder="Duration">
-            </div>
-            <div class="mt-4" >
-                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Difficulty</label>
-                <input class="form-control" id="exampleFormControlInput1" placeholder="Difficulty">
-            </div>
-            <div class="mt-4">
-                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Estimated Time</label>
-                <input class="form-control" id="exampleFormControlInput1" placeholder="Estimated Time">
-            </div>
-            <div class="mt-4">
-                <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Select the project</label>
-                <select class="form-select bg-white text-secondary" aria-label="Project" required>
-                    <option selected>Projects</option>
-                    <option value="0">PRIVATE</option>
-                    <option value="1">PROFESSIONNAL</option>
-                </select>
-            </div>
+                    {{ user.username }}
+                </option>
+            </select>
         </div>
     </div>
-    <div class="d-flex justify-content-end mt-5">
-        <button  type="submit" class="btn btn-outline-primary">CREATE</button>
+    <div *ngIf="type === 'TASK'" class="mt-4">
+        <div >
+            <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Duration</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="Duration">
+        </div>
+        <div class="mt-4" >
+            <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Difficulty</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="Difficulty">
+        </div>
+        <div class="mt-4">
+            <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Estimated Time</label>
+            <input class="form-control" id="exampleFormControlInput1" placeholder="Estimated Time">
+        </div>
+        <div class="mt-4">
+            <label for="exampleFormControlInput1" class="form-label h2 text-secondary">Select the project</label>
+            <select class="form-select bg-white text-secondary" aria-label="Project" required>
+                <option selected>Projects</option>
+                <option value="0">PRIVATE</option>
+                <option value="1">PROFESSIONNAL</option>
+            </select>
+        </div>
     </div>
+</div>
+<div class="d-flex justify-content-end mt-5">
+    <button  type="submit" class="btn btn-outline-primary">CREATE</button>
+</div>
 </form>
