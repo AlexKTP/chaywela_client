@@ -10,7 +10,6 @@ import { CustomResponse } from 'src/app/models/custom-response';
 import { Project } from 'src/app/models/project';
 import { Task } from 'src/app/models/task';
 import { User } from 'src/app/models/user';
-import { DataService } from 'src/app/service/data-service.service';
 import { ProjectService } from 'src/app/service/project.service';
 import { TaskService } from 'src/app/service/task.service';
 import { UserService } from 'src/app/service/user.service';
@@ -174,29 +173,71 @@ export class ListComponent implements OnInit {
   }
 
   initTask() {
-    this.appState$ = this.taskService.tasks$.pipe(
-      tap({
-        next: value => {
-          console.log("on est la pipe du task service " + value);
-          this.tasks = (value.data.objList) as Task[]
-          this.taskNumber = this.tasks != undefined ? this.tasks.length : -1;
-        },
-        error: error => console.log(error),
-        complete: () => {
-          console.log('Fetching tasks done!')
-        }
-      })
-    );
 
-    this.appState$.subscribe(
-      {
-        complete: () => {
-          for (let u in this.tasks) {
-            console.log('Task: ' + u)
+
+
+    let projectID: number = -1;
+
+    this.activatedRoute.params.subscribe((params: Params) => {
+      projectID = parseInt(params['idProject']);
+    });
+
+
+    if (!isNaN(projectID) && projectID != -1) {
+
+      this.appState$ = this.taskService.tasks$.pipe(
+        tap({
+          next: value => {
+            this.taskService.filterByProject$(projectID, value).subscribe(
+              val => {
+                console.log("on est la pipe du task service " + val);
+                this.tasks = (val.data.objList) as Task[]
+                this.taskNumber = this.tasks != undefined ? this.tasks.length : -1;
+              }
+            );
+
+          },
+          error: error => console.log(error),
+          complete: () => {
+            console.log('Fetching tasks done!')
+          }
+        })
+      );
+
+      this.appState$.subscribe(
+        {
+          complete: () => {
+            for (let u in this.tasks) {
+              console.log('Task: ' + u)
+            }
           }
         }
-      }
-    );
+      );
+    } else {
+      this.appState$ = this.taskService.tasks$.pipe(
+        tap({
+          next: value => {
+            console.log("on est la pipe du task service " + value);
+            this.tasks = (value.data.objList) as Task[]
+            this.taskNumber = this.tasks != undefined ? this.tasks.length : -1;
+          },
+          error: error => console.log(error),
+          complete: () => {
+            console.log('Fetching tasks done!')
+          }
+        })
+      );
+
+      this.appState$.subscribe(
+        {
+          complete: () => {
+            for (let u in this.tasks) {
+              console.log('Task: ' + u)
+            }
+          }
+        }
+      );
+    }
   }
 
   onSend(): void {
@@ -293,6 +334,7 @@ export class ListComponent implements OnInit {
     var keys = Object.keys(this.projectTypes);
     return keys.slice(keys.length / 2);
   }
+
 
 
 }

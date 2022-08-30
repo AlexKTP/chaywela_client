@@ -52,6 +52,28 @@ export class TaskService {
       catchError(this.handleError)
     );
 
+  filterByProject$ = (id: number, response: CustomResponse) => <Observable<CustomResponse>>
+    new Observable<CustomResponse>(
+      subscriber => {
+        response.data.objList = response.data.objList as Task[];
+        subscriber.next(
+          {
+            ...response,
+            message: 'Tasks filtered by ${status} status',
+            data: {
+              objList: response.data.objList.filter(t => {
+                return (t as Task).project.id === id;
+              })
+            }
+          }
+        );
+        subscriber.complete();
+      }
+    ).pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
   delete$ = (taskId: number) => <Observable<CustomResponse>>
     this.http.delete<CustomResponse>(`${this.apiUrl}/tasks/delete/${taskId}`)
       .pipe(
