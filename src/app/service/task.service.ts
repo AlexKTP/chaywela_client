@@ -29,7 +29,7 @@ export class TaskService {
         catchError(this.handleError)
       )
 
-  filter$ = (status: Status, response: CustomResponse) => <Observable<CustomResponse>>
+  filterByStatus$ = (status: Status, response: CustomResponse) => <Observable<CustomResponse>>
     new Observable<CustomResponse>(
       subscriber => {
         console.log(response);

@@ -46,7 +46,7 @@ export class ProjectService {
       )
 
 
-  filter$ = (type: ProjectType, response: CustomResponse) => <Observable<CustomResponse>>
+  filterByType$ = (type: ProjectType, response: CustomResponse) => <Observable<CustomResponse>>
     new Observable<CustomResponse>(
       subscriber => {
         console.log(response);
@@ -58,6 +58,29 @@ export class ProjectService {
             data: {
               objList: response.data.objList.filter((project): project is Project => {
                 return (project as Project).projectType == type;
+              })
+            }
+          }
+        );
+        subscriber.complete();
+      }
+    ).pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+
+  filterByUser$ = (userId: number, response: CustomResponse) => <Observable<CustomResponse>>
+    new Observable<CustomResponse>(
+      subscriber => {
+        console.log(response);
+        response.data.objList = response.data.objList as Project[];
+        subscriber.next(
+          {
+            ...response,
+            message: 'Projects filtered by ${userId} type',
+            data: {
+              objList: response.data.objList.filter((project): project is Project => {
+                return (project as Project).user.id == userId;
               })
             }
           }

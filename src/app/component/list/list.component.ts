@@ -143,33 +143,52 @@ export class ListComponent implements OnInit {
   }
 
   initProject() {
-    this.appState$ = this.projectService.projects$.pipe(
-      tap({
-        next: value => {
-          console.log("on est la pipe du project service " + value);
-          console.log('voici value.data ' + value.data)
-          this.projects = value.data.objList as Project[];
-          this.projectNumber = this.projects != undefined ? this.projects.length : -1;
-        },
-        error: error => console.log(error),
-        complete: () => {
-          console.log('Fetching project done with' + this.projectNumber + 'retrieved!')
-        }
-      })
-    );
+    let userId: number = -1;
+
+    this.activatedRoute.params.subscribe((params: Params) => {
+      userId = parseInt(params['idUser']);
+    });
 
 
-    this.appState$.subscribe(
-      {
-        complete: () => {
-          for (let u in this.projects) {
-            console.log('Project detail: ' + u)
+    if (!isNaN(userId) && userId != -1) {
+
+      this.appState$ = this.projectService.projects$.pipe(
+        tap({
+          next: value => {
+            this.projectService.filterByUser$(userId, value).subscribe(
+              val => {
+                console.log("on est la pipe du project service " + val);
+                this.projects = (val.data.objList) as Project[]
+                this.projectNumber = this.projects != undefined ? this.projects.length : -1;
+              }
+            );
+
+          },
+          error: error => console.log(error),
+          complete: () => {
+            console.log('Fetching projects done!')
           }
-        }
-      }
-    );
+        })
+      );
 
-    this.projectForm.controls
+      this.appState$.subscribe();
+    } else {
+      this.appState$ = this.projectService.projects$.pipe(
+        tap({
+          next: value => {
+            console.log("on est la pipe du project service " + value);
+            this.projects = (value.data.objList) as Project[]
+            this.projectNumber = this.projects != undefined ? this.projects.length : -1;
+          },
+          error: error => console.log(error),
+          complete: () => {
+            console.log('Fetching tasks done!')
+          }
+        })
+      );
+
+      this.appState$.subscribe();
+    }
   }
 
   initTask() {

@@ -56,6 +56,9 @@ export class CreateFormComponent implements OnInit {
       console.log('>>>>>' + this.type);
     });
 
+    this.projects$ = this.projectService.projects$;
+    this.projects$.subscribe();
+
 
 
     this.users$ = this.userService.users$.pipe(

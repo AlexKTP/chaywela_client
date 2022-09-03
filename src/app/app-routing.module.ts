@@ -13,7 +13,7 @@ const routes: Routes = [
       {
         path: ":idUser/projects", children: [
           { path: '', component: ListComponent },
-          { path: ':idProject/tasks', component: ListComponent }
+          { path: ':idTask/tasks', component: ListComponent },
         ]
       }
     ]
